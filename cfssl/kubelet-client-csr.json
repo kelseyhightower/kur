@@ -1,0 +1,17 @@
+{
+  "CN": "kubelet",
+  "hosts": [""],
+  "key": {
+    "algo": "rsa",
+    "size": 2048
+  },
+  "names": [
+    {
+      "C": "US",
+      "L": "Portland",
+      "O": "Kubernetes",
+      "OU": "Kubelet",
+      "ST": "Oregon"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+$ docker run --detach --net=host --name=kubelet --privileged \
+    --restart=always \
+    --volume=/usr/bin/nsenter:/nsenter \
+    --volume=/usr:/usr \
+    --volume=/lib64:/lib64 \
+    --volume=/:/rootfs:ro \
+    --volume=/etc/os-release:/etc/os-release \
+    --volume=/usr/share/ca-certificates/:/etc/ssl/certs \
+    --volume=/sys:/sys:ro \
+    --volume=/var/lib/docker/:/var/lib/docker:ro \
+    --volume=/var/lib/kubelet/:/var/lib/kubelet:rw \
+    --volume=/var/run:/var/run:rw \
+    --volumes-from=kubelet-conf-0.0.1 \
+    kelseyhightower/kubelet:0.20.0 \
+    --address=0.0.0.0 \
+    --api-servers=https://node0.c.kubestack.internal:6443 \
+    --container-runtime=docker \
+    --containerized \
+    --enable-server \
+    --kubeconfig=/etc/kubernetes/kubeconfig \
+    --machine-id-file=/rootfs/etc/machine-id \
+    --register-node=true \
+    --v=1

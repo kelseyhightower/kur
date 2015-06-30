@@ -1,0 +1,19 @@
+[Unit]
+Description=Docker Application Container Engine
+Documentation=http://docs.docker.io
+
+[Service]
+ExecStart=/usr/bin/docker --daemon \
+  --bip=10.200.0.1/24 \
+  --host=tcp://0.0.0.0:2376 \
+  --host=unix:///var/run/docker.sock \
+  --tlsverify \
+  --tlscacert=/etc/docker/ca.pem \
+  --tlscert=/etc/docker/server.pem \
+  --tlskey=/etc/docker/server-key.pem \
+  --storage-driver=overlay
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
